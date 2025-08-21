@@ -29,12 +29,12 @@ public class Timmy {
     }
 
     private void handleMark(String input) {
-        String arg = input.substring(5);
+        String[] args = input.split(" ");
         int index;
         try {
-            index = Integer.parseInt(arg) - 1;
+            index = Integer.parseInt(args[1]) - 1;
         } catch (NumberFormatException e) {
-            System.out.println("Error: " + arg);
+            System.out.println("Error: " + args[1]);
             return;
         }
         Task targetTask = this.storage.get(index);
@@ -44,12 +44,12 @@ public class Timmy {
     }
 
     private void handleUnmark(String input) {
-        String arg = input.substring(7);
+        String[] args = input.split(" ");
         int index;
         try {
-            index = Integer.parseInt(arg) - 1;
+            index = Integer.parseInt(args[1]) - 1;
         } catch (NumberFormatException e) {
-            System.out.println("Error: " + arg);
+            System.out.println("Error: " + args[1]);
             return;
         }
         Task targetTask = storage.get(index);
