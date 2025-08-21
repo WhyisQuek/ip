@@ -18,11 +18,17 @@ public class Timmy {
         System.out.println("    ____________________________________________________________");
     }
 
+    private String addMessage(Task task) {
+        return "     Got it. I've added this task: \n"
+                + "       " + task.toCompleteString() + "\n"
+                + "     Now you have " + this.storage.size() + " tasks in the list.";
+    }
+
     private void handleList() {
         int index = 1;
         System.out.println("    ____________________________________________________________");
         for (Task t : this.storage) {
-            System.out.println("    " + index + ". " + t.printWithStatusIcon());
+            System.out.println("    " + index + ". " + t.toCompleteString());
             index += 1;
         }
         System.out.println("    ____________________________________________________________");
@@ -40,7 +46,7 @@ public class Timmy {
         Task targetTask = this.storage.get(index);
         targetTask.markAsDone();
         borderPrint("     Nice! I've marked this task as done:\n"
-                + "       " + targetTask.printWithStatusIcon());
+                + "       " + targetTask.toCompleteString());
     }
 
     private void handleUnmark(String input) {
@@ -52,10 +58,30 @@ public class Timmy {
             System.out.println("Error: " + args[1]);
             return;
         }
-        Task targetTask = storage.get(index);
+        Task targetTask = this.storage.get(index);
         targetTask.markAsNotDone();
         borderPrint("     Ok. I've marked this task as not done yet:\n"
-                + "       " + targetTask.printWithStatusIcon());
+                + "       " + targetTask.toCompleteString());
+    }
+
+    private void handleToDo(String input) {
+        ToDo newToDo = new ToDo(input.split(" ", 2)[1]);
+        this.storage.add(newToDo);
+        borderPrint(addMessage(newToDo));
+    }
+
+    private void handleDeadline(String input) {
+        String[] args = Parser.parseDeadline(input);
+        Deadline newDeadline = new Deadline(args[0], args[1]);
+        this.storage.add(newDeadline);
+        borderPrint(addMessage(newDeadline));
+    }
+
+    private void handleEvent(String input) {
+        String[] args = Parser.parseEvent(input);
+        Event newEvent = new Event(args[0], args[1], args[2]);
+        this.storage.add(newEvent);
+        borderPrint(addMessage(newEvent));
     }
 
     public void run() {
@@ -81,10 +107,17 @@ public class Timmy {
             else if (input.startsWith("unmark")) {
                 handleUnmark(input);
             }
+            else if (input.startsWith("todo")) {
+                handleToDo(input);
+            }
+            else if (input.startsWith("deadline")) {
+                handleDeadline(input);
+            }
+            else if (input.startsWith("event")) {
+                handleEvent(input);
+            }
             else {
-                Task newTask = new Task(input);
-                storage.add(newTask);
-                borderPrint("     added: " + newTask.printWithStatusIcon());
+                borderPrint("Sorry, I do not understand that command.");
             }
         }
     }

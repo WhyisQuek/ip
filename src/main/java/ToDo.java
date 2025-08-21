@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class ToDo extends Task {
 
-public class ToDo {
+    ToDo(String desc) {
+        super(desc);
+    }
+
+    public String toCompleteString() {
+        return "[T]" + super.toStringWithStatusIcon();
+    }
 }

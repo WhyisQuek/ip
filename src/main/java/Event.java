@@ -1,4 +1,16 @@
-package PACKAGE_NAME;
+public class Event extends Task {
+    protected final String start;
+    protected final String end;
 
-public class Event {
+    Event(String desc, String start, String end) {
+        super(desc);
+        this.start = start;
+        this.end = end;
+    }
+
+    public String toCompleteString() {
+        return "[E]" + super.toStringWithStatusIcon()
+                + " (from: " + start
+                + " to: " + end + ")";
+    }
 }

@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     protected final String description;
     protected boolean isDone;
 
@@ -15,11 +15,13 @@ public class Task {
         this.isDone = false;
     }
 
+    abstract String toCompleteString();
+
     public String getStatusIcon() {
         return (this.isDone ? "[X]" : "[ ]");
     }
 
-    public String printWithStatusIcon() {
+    public String toStringWithStatusIcon() {
         return this.getStatusIcon() + " " + this;
     }
 

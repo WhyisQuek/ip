@@ -1,4 +1,13 @@
-package PACKAGE_NAME;
+public class Deadline extends Task {
+    protected final String end;
 
-public class Deadline {
+    Deadline(String desc, String end) {
+        super(desc);
+        this.end = end;
+    }
+
+    public String toCompleteString() {
+        return "[D]" + super.toStringWithStatusIcon()
+                + " (by: " + end + ")";
+    }
 }
