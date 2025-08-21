@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
 
 public class Timmy {
-    private ArrayList<Task> storage;
+    protected final ArrayList<Task> storage;
 
     public Timmy() {
         storage = new ArrayList<Task>();
@@ -13,48 +12,80 @@ public class Timmy {
         new Timmy().run();
     }
 
-    private void border_print(String s) {
-        System.out.println("____________________________________________________________");
+    private void borderPrint(String s) {
+        System.out.println("    ____________________________________________________________");
         System.out.println(s);
-        System.out.println("____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
     }
 
-    private void print_storage() {
+    private void handleList() {
         int index = 1;
-        System.out.println("____________________________________________________________");
-        for (Task t : storage) {
-            System.out.println(index + ". " + t);
+        System.out.println("    ____________________________________________________________");
+        for (Task t : this.storage) {
+            System.out.println("    " + index + ". " + t.printWithStatusIcon());
             index += 1;
         }
-        System.out.println("____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private void handleMark(String input) {
+        String arg = input.substring(5);
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: " + arg);
+            return;
+        }
+        Task targetTask = this.storage.get(index);
+        targetTask.markAsDone();
+        borderPrint("     Nice! I've marked this task as done:\n"
+                + "       " + targetTask.printWithStatusIcon());
+    }
+
+    private void handleUnmark(String input) {
+        String arg = input.substring(7);
+        int index;
+        try {
+            index = Integer.parseInt(arg) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: " + arg);
+            return;
+        }
+        Task targetTask = storage.get(index);
+        targetTask.markAsNotDone();
+        borderPrint("     Ok. I've marked this task as not done yet:\n"
+                + "       " + targetTask.printWithStatusIcon());
     }
 
     public void run() {
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         boolean isExit = false;
-        String welcome = """
-                        Hello! I'm Timmy
-                        What can I do for you?""";
-        String bye = """
-                        Bye. Hope to see you again soon!""";
+        String welcome = "     Hello! I'm Timmy\n     What can I do for you?";
+        String bye = "     Bye. Hope to see you again soon!";
 
-        border_print(welcome);
+        borderPrint(welcome);
 
         while (!isExit) {
-            String inputString = input.nextLine();
-            if (inputString.equals("bye")) {
-                border_print(bye);
+            String input = sc.nextLine();
+            if (input.equals("bye")) {
+                borderPrint(bye);
                 isExit = true;
             }
-            else if (inputString.equals("list")) {
-                print_storage();
+            else if (input.equals("list")) {
+                handleList();
+            }
+            else if (input.startsWith("mark")) {
+                handleMark(input);
+            }
+            else if (input.startsWith("unmark")) {
+                handleUnmark(input);
             }
             else {
-                Task newTask = new Task(inputString);
+                Task newTask = new Task(input);
                 storage.add(newTask);
-                border_print("added: " + newTask);
+                borderPrint("     added: " + newTask.printWithStatusIcon());
             }
         }
-
     }
 }
