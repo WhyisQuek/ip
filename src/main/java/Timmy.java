@@ -108,8 +108,10 @@ public class Timmy {
                 } else if (args[0].equals("event")) {
                     handleEvent(args[1]);
                 } else {
-                    borderPrint("Sorry, I do not understand that command.");
+                    throw new TimmyUnknownCommandException();
                 }
+            } catch (TimmyUnknownCommandException e) {
+                borderPrint("Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
                 borderPrint("     Error: Invalid Parameters were provided.");
             } catch (TimmyStorageIndexOutOfRangeException e) {
