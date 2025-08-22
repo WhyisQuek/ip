@@ -6,29 +6,33 @@ public class Parser {
         return command.split(" ", 2);
     }
 
-    public static int parseMark(String input) {
-        String[] args = input.split(" ", 2);
+    public static int parseMark(String input) throws TimmyInvalidParamException {
         int index;
         try {
-            index = Integer.parseInt(args[1]) - 1;
+            index = Integer.parseInt(input) - 1;
         } catch (NumberFormatException e) {
-            System.out.println("Error: " + args[1]);
-            return -1;
+            throw new TimmyInvalidParamException();
         }
         return index;
     }
 
-    public static String[] parseDeadline(String input) {
-        Pattern pattern = Pattern.compile("deadline (.*?) /by (.*)");
+    public static String[] parseDeadline(String input) throws TimmyInvalidParamException {
+        Pattern pattern = Pattern.compile("(.*?) /by (.*)");
         Matcher matcher = pattern.matcher(input);
-        matcher.find();
-        return new String[] {matcher.group(1), matcher.group(2)};
+        if (matcher.matches()) {
+            return new String[]{matcher.group(1), matcher.group(2)};
+        } else {
+            throw new TimmyInvalidParamException();
+        }
     }
 
-    public static String[] parseEvent(String input) {
-        Pattern pattern = Pattern.compile("event (.*?) /from (.*?) /to (.*)");
+    public static String[] parseEvent(String input) throws TimmyInvalidParamException {
+        Pattern pattern = Pattern.compile("(.*?) /from (.*?) /to (.*)");
         Matcher matcher = pattern.matcher(input);
-        matcher.find();
-        return new String[] {matcher.group(1), matcher.group(2), matcher.group(3)};
+        if (matcher.matches()) {
+            return new String[]{matcher.group(1), matcher.group(2), matcher.group(3)};
+        } else {
+            throw new TimmyInvalidParamException();
+        }
     }
 }

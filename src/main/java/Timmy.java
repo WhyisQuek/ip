@@ -34,36 +34,46 @@ public class Timmy {
         System.out.println("    ____________________________________________________________");
     }
 
-    private void handleMark(String input) {
+    private void handleMark(String input) throws TimmyInvalidParamException, TimmyStorageIndexOutOfRangeException {
         int index = Parser.parseMark(input);
-        Task targetTask = this.storage.get(index);
+        Task targetTask;
+        try {
+            targetTask = this.storage.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TimmyStorageIndexOutOfRangeException();
+        }
         targetTask.markAsDone();
         borderPrint("     Nice! I've marked this task as done:\n"
                 + "       " + targetTask.toCompleteString());
     }
 
-    private void handleUnmark(String input) {
+    private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyStorageIndexOutOfRangeException {
         int index = Parser.parseMark(input);
-        Task targetTask = this.storage.get(index);
+        Task targetTask;
+        try {
+            targetTask = this.storage.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TimmyStorageIndexOutOfRangeException();
+        }
         targetTask.markAsNotDone();
         borderPrint("     Ok. I've marked this task as not done yet:\n"
                 + "       " + targetTask.toCompleteString());
     }
 
     private void handleToDo(String input) {
-        ToDo newToDo = new ToDo(input.split(" ", 2)[1]);
+        ToDo newToDo = new ToDo(input);
         this.storage.add(newToDo);
         borderPrint(addMessage(newToDo));
     }
 
-    private void handleDeadline(String input) {
+    private void handleDeadline(String input) throws TimmyInvalidParamException {
         String[] args = Parser.parseDeadline(input);
         Deadline newDeadline = new Deadline(args[0], args[1]);
         this.storage.add(newDeadline);
         borderPrint(addMessage(newDeadline));
     }
 
-    private void handleEvent(String input) {
+    private void handleEvent(String input) throws TimmyInvalidParamException {
         String[] args = Parser.parseEvent(input);
         Event newEvent = new Event(args[0], args[1], args[2]);
         this.storage.add(newEvent);
@@ -79,31 +89,33 @@ public class Timmy {
         borderPrint(welcome);
 
         while (!isExit) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                borderPrint(bye);
-                isExit = true;
-            }
-            else if (input.equals("list")) {
-                handleList();
-            }
-            else if (input.startsWith("mark")) {
-                handleMark(input);
-            }
-            else if (input.startsWith("unmark")) {
-                handleUnmark(input);
-            }
-            else if (input.startsWith("todo")) {
-                handleToDo(input);
-            }
-            else if (input.startsWith("deadline")) {
-                handleDeadline(input);
-            }
-            else if (input.startsWith("event")) {
-                handleEvent(input);
-            }
-            else {
-                borderPrint("Sorry, I do not understand that command.");
+            try {
+                String input = sc.nextLine();
+                String[] args = Parser.parseCommand(input);
+                if (args[0].equals("bye")) {
+                    borderPrint(bye);
+                    isExit = true;
+                } else if (args[0].equals("list")) {
+                    handleList();
+                } else if (args[0].equals("mark")) {
+                    handleMark(args[1]);
+                } else if (args[0].equals("unmark")) {
+                    handleUnmark(args[1]);
+                } else if (args[0].equals("todo")) {
+                    handleToDo(args[1]);
+                } else if (args[0].equals("deadline")) {
+                    handleDeadline(args[1]);
+                } else if (args[0].equals("event")) {
+                    handleEvent(args[1]);
+                } else {
+                    borderPrint("Sorry, I do not understand that command.");
+                }
+            } catch (TimmyInvalidParamException e) {
+                borderPrint("     Error: Invalid Parameters were provided.");
+            } catch (TimmyStorageIndexOutOfRangeException e) {
+                borderPrint("     Error: Invalid Index.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                borderPrint("     Error: No arguments were provided");
             }
         }
     }

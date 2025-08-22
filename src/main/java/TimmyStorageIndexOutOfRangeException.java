@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class TimmyStorageIndexOutOfRangeException extends Exception {
+    public TimmyStorageIndexOutOfRangeException() {}
 
-public class TimmyStorageIndexOutOfRangeException {
+    public TimmyStorageIndexOutOfRangeException(String message) {
+        super(message);
+    }
 }
