@@ -6,6 +6,18 @@ public class Parser {
         return command.split(" ", 2);
     }
 
+    public static int parseMark(String input) {
+        String[] args = input.split(" ", 2);
+        int index;
+        try {
+            index = Integer.parseInt(args[1]) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: " + args[1]);
+            return -1;
+        }
+        return index;
+    }
+
     public static String[] parseDeadline(String input) {
         Pattern pattern = Pattern.compile("deadline (.*?) /by (.*)");
         Matcher matcher = pattern.matcher(input);

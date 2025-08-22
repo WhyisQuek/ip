@@ -35,14 +35,7 @@ public class Timmy {
     }
 
     private void handleMark(String input) {
-        String[] args = input.split(" ");
-        int index;
-        try {
-            index = Integer.parseInt(args[1]) - 1;
-        } catch (NumberFormatException e) {
-            System.out.println("Error: " + args[1]);
-            return;
-        }
+        int index = Parser.parseMark(input);
         Task targetTask = this.storage.get(index);
         targetTask.markAsDone();
         borderPrint("     Nice! I've marked this task as done:\n"
@@ -50,14 +43,7 @@ public class Timmy {
     }
 
     private void handleUnmark(String input) {
-        String[] args = input.split(" ");
-        int index;
-        try {
-            index = Integer.parseInt(args[1]) - 1;
-        } catch (NumberFormatException e) {
-            System.out.println("Error: " + args[1]);
-            return;
-        }
+        int index = Parser.parseMark(input);
         Task targetTask = this.storage.get(index);
         targetTask.markAsNotDone();
         borderPrint("     Ok. I've marked this task as not done yet:\n"
