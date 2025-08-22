@@ -12,6 +12,10 @@ public class Timmy {
         new Timmy().run();
     }
 
+    private void validateCommand() {
+
+    }
+
     private void borderPrint(String s) {
         System.out.println("    ____________________________________________________________");
         System.out.println(s);
@@ -105,32 +109,39 @@ public class Timmy {
         String bye = "     Bye. Hope to see you again soon!";
 
         borderPrint(welcome);
-
         while (!isExit) {
             try {
                 String input = sc.nextLine();
                 String[] args = Parser.parseCommand(input);
-                if (args[0].equals("bye")) {
-                    borderPrint(bye);
-                    isExit = true;
-                } else if (args[0].equals("list")) {
-                    handleList();
-                } else if (args[0].equals("mark")) {
-                    handleMark(args[1]);
-                } else if (args[0].equals("unmark")) {
-                    handleUnmark(args[1]);
-                } else if (args[0].equals("todo")) {
-                    handleToDo(args[1]);
-                } else if (args[0].equals("deadline")) {
-                    handleDeadline(args[1]);
-                } else if (args[0].equals("event")) {
-                    handleEvent(args[1]);
-                } else if (args[0].equals("delete")) {
-                    handleDelete(args[1]);
-                } else {
-                    throw new TimmyUnknownCommandException();
+                ValidCommand command = ValidCommand.valueOf(args[0].toUpperCase());
+                switch (command) {
+                    case BYE:
+                        borderPrint(bye);
+                        isExit = true;
+                        break;
+                    case LIST:
+                        handleList();
+                        break;
+                    case MARK:
+                        handleMark(args[1]);
+                        break;
+                    case UNMARK:
+                        handleUnmark(args[1]);
+                        break;
+                    case TODO:
+                        handleToDo(args[1]);
+                        break;
+                    case DEADLINE:
+                        handleDeadline(args[1]);
+                        break;
+                    case EVENT:
+                        handleEvent(args[1]);
+                        break;
+                    case DELETE:
+                        handleDelete(args[1]);
+                        break;
                 }
-            } catch (TimmyUnknownCommandException e) {
+            } catch (IllegalArgumentException e) {
                 borderPrint("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
                 borderPrint("     Error: Invalid Parameters were provided.");
