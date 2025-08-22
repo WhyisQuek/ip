@@ -24,6 +24,12 @@ public class Timmy {
                 + "     Now you have " + this.storage.size() + " tasks in the list.";
     }
 
+    private String deleteMessage(Task task) {
+        return "     Noted. I've removed this task: \n"
+                + "       " + task.toCompleteString() + "\n"
+                + "     Now you have " + this.storage.size() + " tasks in the list.";
+    }
+
     private void handleList() {
         int index = 1;
         System.out.println("    ____________________________________________________________");
@@ -34,26 +40,26 @@ public class Timmy {
         System.out.println("    ____________________________________________________________");
     }
 
-    private void handleMark(String input) throws TimmyInvalidParamException, TimmyStorageIndexOutOfRangeException {
+    private void handleMark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task targetTask;
         try {
             targetTask = this.storage.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new TimmyStorageIndexOutOfRangeException();
+            throw new TimmyStorageOutOfBoundsException();
         }
         targetTask.markAsDone();
         borderPrint("     Nice! I've marked this task as done:\n"
                 + "       " + targetTask.toCompleteString());
     }
 
-    private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyStorageIndexOutOfRangeException {
+    private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task targetTask;
         try {
             targetTask = this.storage.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new TimmyStorageIndexOutOfRangeException();
+            throw new TimmyStorageOutOfBoundsException();
         }
         targetTask.markAsNotDone();
         borderPrint("     Ok. I've marked this task as not done yet:\n"
@@ -78,6 +84,18 @@ public class Timmy {
         Event newEvent = new Event(args[0], args[1], args[2]);
         this.storage.add(newEvent);
         borderPrint(addMessage(newEvent));
+    }
+    
+    private void handleDelete(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
+        int index = Parser.parseMark(input);
+        Task deletedTask;
+        try {
+            deletedTask = this.storage.get(index);
+            this.storage.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new TimmyStorageOutOfBoundsException();
+        }
+        borderPrint(deleteMessage(deletedTask));
     }
 
     public void run() {
@@ -107,14 +125,16 @@ public class Timmy {
                     handleDeadline(args[1]);
                 } else if (args[0].equals("event")) {
                     handleEvent(args[1]);
+                } else if (args[0].equals("delete")) {
+                    handleDelete(args[1]);
                 } else {
                     throw new TimmyUnknownCommandException();
                 }
             } catch (TimmyUnknownCommandException e) {
-                borderPrint("Sorry, I do not understand that command.");
+                borderPrint("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
                 borderPrint("     Error: Invalid Parameters were provided.");
-            } catch (TimmyStorageIndexOutOfRangeException e) {
+            } catch (TimmyStorageOutOfBoundsException e) {
                 borderPrint("     Error: Invalid Index.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 borderPrint("     Error: No arguments were provided");
