@@ -7,41 +7,19 @@ import Exceptions.TimmyStorageOutOfBoundsException;
 
 public class Timmy {
     protected final ArrayList<Task> storage;
+    protected final Ui ui;
 
     public Timmy() {
         storage = Filer.loadStorage();
+        ui = new Ui();
     }
 
     public static void main(String[] args) {
         new Timmy().run();
     }
 
-    private void borderPrint(String s) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println(s);
-        System.out.println("    ____________________________________________________________");
-    }
-
-    private String addMessage(Task task) {
-        return "     Got it. I've added this task: \n"
-                + "       " + task.toCompleteString() + "\n"
-                + "     Now you have " + this.storage.size() + " tasks in the list.";
-    }
-
-    private String deleteMessage(Task task) {
-        return "     Noted. I've removed this task: \n"
-                + "       " + task.toCompleteString() + "\n"
-                + "     Now you have " + this.storage.size() + " tasks in the list.";
-    }
-
     private void handleList() {
-        int index = 1;
-        System.out.println("    ____________________________________________________________");
-        for (Task t : this.storage) {
-            System.out.println("    " + index + ". " + t.toCompleteString());
-            index += 1;
-        }
-        System.out.println("    ____________________________________________________________");
+        ui.showList(this.storage);
     }
 
     private void handleMark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
@@ -54,8 +32,7 @@ public class Timmy {
         }
         targetTask.markAsDone();
         Filer.saveStorage(storage);
-        borderPrint("     Nice! I've marked this task as done:\n"
-                + "       " + targetTask.toCompleteString());
+        ui.showMarkMessage(targetTask);
     }
 
     private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
@@ -68,15 +45,14 @@ public class Timmy {
         }
         targetTask.markAsNotDone();
         Filer.saveStorage(storage);
-        borderPrint("     Ok. I've marked this task as not done yet:\n"
-                + "       " + targetTask.toCompleteString());
+        ui.showUnmarkMessage(targetTask);
     }
 
     private void handleToDo(String input) {
         ToDo newToDo = new ToDo(input);
         this.storage.add(newToDo);
         Filer.saveStorage(storage);
-        borderPrint(addMessage(newToDo));
+        ui.showAddMessage(newToDo, storage.size());
     }
 
     private void handleDeadline(String input) throws TimmyInvalidParamException, TimmyDateParsingException {
@@ -84,7 +60,7 @@ public class Timmy {
         Deadline newDeadline = new Deadline(args[0], args[1]);
         this.storage.add(newDeadline);
         Filer.saveStorage(storage);
-        borderPrint(addMessage(newDeadline));
+        ui.showAddMessage(newDeadline, storage.size());
     }
 
     private void handleEvent(String input) throws TimmyInvalidParamException {
@@ -92,7 +68,7 @@ public class Timmy {
         Event newEvent = new Event(args[0], args[1], args[2]);
         this.storage.add(newEvent);
         Filer.saveStorage(storage);
-        borderPrint(addMessage(newEvent));
+        ui.showAddMessage(newEvent, storage.size());
     }
     
     private void handleDelete(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
@@ -105,16 +81,14 @@ public class Timmy {
             throw new TimmyStorageOutOfBoundsException();
         }
         Filer.saveStorage(storage);
-        borderPrint(deleteMessage(deletedTask));
+        ui.showDeleteMessage(deletedTask, storage.size());
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
-        String welcome = "     Hello! I'm Timmy\n     What can I do for you?";
-        String bye = "     Bye. Hope to see you again soon!";
 
-        borderPrint(welcome);
+        ui.showWelcomeMessage();
         while (!isExit) {
             try {
                 String input = sc.nextLine();
@@ -122,7 +96,7 @@ public class Timmy {
                 ValidCommand command = ValidCommand.valueOf(args[0].toUpperCase());
                 switch (command) {
                     case BYE:
-                        borderPrint(bye);
+                        ui.showByeMessage();
                         isExit = true;
                         break;
                     case LIST:
@@ -148,15 +122,15 @@ public class Timmy {
                         break;
                 }
             } catch (IllegalArgumentException e) {
-                borderPrint("     Sorry, I do not understand that command.");
+                ui.showMessage("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
-                borderPrint("     Error: Invalid Parameters were provided.");
+                ui.showMessage("     Error: Invalid Parameters were provided.");
             } catch (TimmyStorageOutOfBoundsException e) {
-                borderPrint("     Error: Invalid Index.");
+                ui.showMessage("     Error: Invalid Index.");
             } catch (ArrayIndexOutOfBoundsException e) {
-                borderPrint("     Error: No arguments were provided.");
+                ui.showMessage("     Error: No arguments were provided.");
             } catch (TimmyDateParsingException e) {
-                borderPrint("     Error: Invalid Date Format.");
+                ui.showMessage("     Error: Invalid Date Format.");
             }
         }
     }
