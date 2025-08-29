@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Exceptions.TimmyDateParsingException;
+import Exceptions.TimmyInvalidParamException;
+import Exceptions.TimmyStorageOutOfBoundsException;
+
 public class Timmy {
     protected final ArrayList<Task> storage;
 

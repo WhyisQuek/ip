@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class TimmyStorageOutOfBoundsException extends Exception {
     public TimmyStorageOutOfBoundsException() {}
 

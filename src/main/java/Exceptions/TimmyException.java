@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class TimmyException extends Exception {
     public TimmyException() {}
 
