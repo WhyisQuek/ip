@@ -21,7 +21,7 @@ public class Filer {
 
             StringBuilder data = new StringBuilder();
             for (Task t : storage) {
-                data.append(t.toCompleteString());
+                data.append(t.toFileString());
                 data.append("\n");
             }
             Files.writeString(FILE_PATH, data.toString());
