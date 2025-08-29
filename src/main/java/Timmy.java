@@ -75,7 +75,7 @@ public class Timmy {
         borderPrint(addMessage(newToDo));
     }
 
-    private void handleDeadline(String input) throws TimmyInvalidParamException {
+    private void handleDeadline(String input) throws TimmyInvalidParamException, TimmyDateParsingException {
         String[] args = Parser.parseDeadline(input);
         Deadline newDeadline = new Deadline(args[0], args[1]);
         this.storage.add(newDeadline);
@@ -150,7 +150,9 @@ public class Timmy {
             } catch (TimmyStorageOutOfBoundsException e) {
                 borderPrint("     Error: Invalid Index.");
             } catch (ArrayIndexOutOfBoundsException e) {
-                borderPrint("     Error: No arguments were provided");
+                borderPrint("     Error: No arguments were provided.");
+            } catch (TimmyDateParsingException e) {
+                borderPrint("     Error: Invalid Date Format.");
             }
         }
     }

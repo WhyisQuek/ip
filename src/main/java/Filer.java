@@ -63,7 +63,7 @@ public class Filer {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | TimmyDateParsingException e) {
             return storage;
         }
 
