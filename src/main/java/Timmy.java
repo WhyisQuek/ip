@@ -109,6 +109,7 @@ public class Timmy {
         String bye = "     Bye. Hope to see you again soon!";
 
         borderPrint(welcome);
+        borderPrint(System.getProperty("user.dir"));
         while (!isExit) {
             try {
                 String input = sc.nextLine();
