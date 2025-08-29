@@ -10,7 +10,7 @@ public class Timmy {
 
     public Timmy() {
         this.ui = new Ui();
-        this.taskList = new TaskList(Filer.loadStorage());
+        this.taskList = new TaskList(Storage.loadStorage());
     }
 
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class Timmy {
         Task targetTask;
         targetTask = this.taskList.getTask(index);
         targetTask.markAsDone();
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showMarkMessage(targetTask);
     }
 
@@ -35,14 +35,14 @@ public class Timmy {
         Task targetTask;
         targetTask = this.taskList.getTask(index);
         targetTask.markAsNotDone();
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showUnmarkMessage(targetTask);
     }
 
     private void handleToDo(String input) {
         ToDo newToDo = new ToDo(input);
         this.taskList.add(newToDo);
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showAddMessage(newToDo, this.taskList.size());
     }
 
@@ -50,7 +50,7 @@ public class Timmy {
         String[] args = Parser.parseDeadline(input);
         Deadline newDeadline = new Deadline(args[0], args[1]);
         this.taskList.add(newDeadline);
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showAddMessage(newDeadline, this.taskList.size());
     }
 
@@ -58,7 +58,7 @@ public class Timmy {
         String[] args = Parser.parseEvent(input);
         Event newEvent = new Event(args[0], args[1], args[2]);
         this.taskList.add(newEvent);
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showAddMessage(newEvent, this.taskList.size());
     }
     
@@ -67,7 +67,7 @@ public class Timmy {
         Task deletedTask;
         deletedTask = this.taskList.getTask(index);
         this.taskList.remove(index);
-        Filer.saveStorage(this.taskList.getList());
+        Storage.saveStorage(this.taskList.getList());
         ui.showDeleteMessage(deletedTask, taskList.size());
     }
 
