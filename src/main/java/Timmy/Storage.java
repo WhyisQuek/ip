@@ -1,3 +1,5 @@
+package Timmy;
+
 import Exceptions.TimmyDateParsingException;
 import Exceptions.TimmyFilerException;
 

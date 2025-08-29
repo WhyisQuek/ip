@@ -1,3 +1,5 @@
+package Timmy;
+
 import Exceptions.TimmyInvalidParamException;
 
 import java.util.regex.Pattern;

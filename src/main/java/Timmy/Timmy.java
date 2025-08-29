@@ -1,3 +1,5 @@
+package Timmy;
+
 import java.util.Scanner;
 
 import Exceptions.TimmyDateParsingException;
@@ -82,29 +84,29 @@ public class Timmy {
                 String[] args = Parser.parseCommand(input);
                 ValidCommand command = ValidCommand.valueOf(args[0].toUpperCase());
                 switch (command) {
-                    case BYE:
+                    case ValidCommand.BYE:
                         ui.showByeMessage();
                         isExit = true;
                         break;
-                    case LIST:
+                    case ValidCommand.LIST:
                         handleList();
                         break;
-                    case MARK:
+                    case ValidCommand.MARK:
                         handleMark(args[1]);
                         break;
-                    case UNMARK:
+                    case ValidCommand.UNMARK:
                         handleUnmark(args[1]);
                         break;
-                    case TODO:
+                    case ValidCommand.TODO:
                         handleToDo(args[1]);
                         break;
-                    case DEADLINE:
+                    case ValidCommand.DEADLINE:
                         handleDeadline(args[1]);
                         break;
-                    case EVENT:
+                    case ValidCommand.EVENT:
                         handleEvent(args[1]);
                         break;
-                    case DELETE:
+                    case ValidCommand.DELETE:
                         handleDelete(args[1]);
                         break;
                 }
