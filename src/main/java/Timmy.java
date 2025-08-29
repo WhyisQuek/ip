@@ -5,15 +5,11 @@ public class Timmy {
     protected final ArrayList<Task> storage;
 
     public Timmy() {
-        storage = new ArrayList<Task>();
+        storage = Filer.loadStorage();
     }
 
     public static void main(String[] args) {
         new Timmy().run();
-    }
-
-    private void validateCommand() {
-
     }
 
     private void borderPrint(String s) {
@@ -53,6 +49,7 @@ public class Timmy {
             throw new TimmyStorageOutOfBoundsException();
         }
         targetTask.markAsDone();
+        Filer.saveStorage(storage);
         borderPrint("     Nice! I've marked this task as done:\n"
                 + "       " + targetTask.toCompleteString());
     }
@@ -66,6 +63,7 @@ public class Timmy {
             throw new TimmyStorageOutOfBoundsException();
         }
         targetTask.markAsNotDone();
+        Filer.saveStorage(storage);
         borderPrint("     Ok. I've marked this task as not done yet:\n"
                 + "       " + targetTask.toCompleteString());
     }
@@ -73,6 +71,7 @@ public class Timmy {
     private void handleToDo(String input) {
         ToDo newToDo = new ToDo(input);
         this.storage.add(newToDo);
+        Filer.saveStorage(storage);
         borderPrint(addMessage(newToDo));
     }
 
@@ -80,6 +79,7 @@ public class Timmy {
         String[] args = Parser.parseDeadline(input);
         Deadline newDeadline = new Deadline(args[0], args[1]);
         this.storage.add(newDeadline);
+        Filer.saveStorage(storage);
         borderPrint(addMessage(newDeadline));
     }
 
@@ -87,6 +87,7 @@ public class Timmy {
         String[] args = Parser.parseEvent(input);
         Event newEvent = new Event(args[0], args[1], args[2]);
         this.storage.add(newEvent);
+        Filer.saveStorage(storage);
         borderPrint(addMessage(newEvent));
     }
     
@@ -99,6 +100,7 @@ public class Timmy {
         } catch (IndexOutOfBoundsException e) {
             throw new TimmyStorageOutOfBoundsException();
         }
+        Filer.saveStorage(storage);
         borderPrint(deleteMessage(deletedTask));
     }
 

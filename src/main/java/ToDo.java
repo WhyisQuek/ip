@@ -7,4 +7,8 @@ public class ToDo extends Task {
     public String toCompleteString() {
         return "[T]" + super.toStringWithStatusIcon();
     }
+
+    public String toFileString() {
+        return "T | " + (isDone ? "1" : "0") + " | " + super.toString();
+    }
 }

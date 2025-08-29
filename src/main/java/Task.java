@@ -17,6 +17,8 @@ abstract public class Task {
 
     abstract String toCompleteString();
 
+    abstract String toFileString();
+
     public String getStatusIcon() {
         return (this.isDone ? "[X]" : "[ ]");
     }
