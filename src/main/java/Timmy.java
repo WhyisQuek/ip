@@ -1,17 +1,16 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import Exceptions.TimmyDateParsingException;
 import Exceptions.TimmyInvalidParamException;
-import Exceptions.TimmyStorageOutOfBoundsException;
+import Exceptions.TimmyTaskListOutOfBoundsException;
 
 public class Timmy {
-    protected final ArrayList<Task> storage;
     protected final Ui ui;
+    protected final TaskList taskList;
 
     public Timmy() {
-        storage = Filer.loadStorage();
-        ui = new Ui();
+        this.ui = new Ui();
+        this.taskList = new TaskList(Filer.loadStorage());
     }
 
     public static void main(String[] args) {
@@ -19,69 +18,57 @@ public class Timmy {
     }
 
     private void handleList() {
-        ui.showList(this.storage);
+        ui.showList(this.taskList.getList());
     }
 
-    private void handleMark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
+    private void handleMark(String input) throws TimmyInvalidParamException, TimmyTaskListOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task targetTask;
-        try {
-            targetTask = this.storage.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new TimmyStorageOutOfBoundsException();
-        }
+        targetTask = this.taskList.getTask(index);
         targetTask.markAsDone();
-        Filer.saveStorage(storage);
+        Filer.saveStorage(this.taskList.getList());
         ui.showMarkMessage(targetTask);
     }
 
-    private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
+    private void handleUnmark(String input) throws TimmyInvalidParamException, TimmyTaskListOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task targetTask;
-        try {
-            targetTask = this.storage.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new TimmyStorageOutOfBoundsException();
-        }
+        targetTask = this.taskList.getTask(index);
         targetTask.markAsNotDone();
-        Filer.saveStorage(storage);
+        Filer.saveStorage(this.taskList.getList());
         ui.showUnmarkMessage(targetTask);
     }
 
     private void handleToDo(String input) {
         ToDo newToDo = new ToDo(input);
-        this.storage.add(newToDo);
-        Filer.saveStorage(storage);
-        ui.showAddMessage(newToDo, storage.size());
+        this.taskList.add(newToDo);
+        Filer.saveStorage(this.taskList.getList());
+        ui.showAddMessage(newToDo, this.taskList.size());
     }
 
     private void handleDeadline(String input) throws TimmyInvalidParamException, TimmyDateParsingException {
         String[] args = Parser.parseDeadline(input);
         Deadline newDeadline = new Deadline(args[0], args[1]);
-        this.storage.add(newDeadline);
-        Filer.saveStorage(storage);
-        ui.showAddMessage(newDeadline, storage.size());
+        this.taskList.add(newDeadline);
+        Filer.saveStorage(this.taskList.getList());
+        ui.showAddMessage(newDeadline, this.taskList.size());
     }
 
     private void handleEvent(String input) throws TimmyInvalidParamException {
         String[] args = Parser.parseEvent(input);
         Event newEvent = new Event(args[0], args[1], args[2]);
-        this.storage.add(newEvent);
-        Filer.saveStorage(storage);
-        ui.showAddMessage(newEvent, storage.size());
+        this.taskList.add(newEvent);
+        Filer.saveStorage(this.taskList.getList());
+        ui.showAddMessage(newEvent, this.taskList.size());
     }
     
-    private void handleDelete(String input) throws TimmyInvalidParamException, TimmyStorageOutOfBoundsException {
+    private void handleDelete(String input) throws TimmyInvalidParamException, TimmyTaskListOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task deletedTask;
-        try {
-            deletedTask = this.storage.get(index);
-            this.storage.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new TimmyStorageOutOfBoundsException();
-        }
-        Filer.saveStorage(storage);
-        ui.showDeleteMessage(deletedTask, storage.size());
+        deletedTask = this.taskList.getTask(index);
+        this.taskList.remove(index);
+        Filer.saveStorage(this.taskList.getList());
+        ui.showDeleteMessage(deletedTask, taskList.size());
     }
 
     public void run() {
@@ -125,7 +112,7 @@ public class Timmy {
                 ui.showMessage("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
                 ui.showMessage("     Error: Invalid Parameters were provided.");
-            } catch (TimmyStorageOutOfBoundsException e) {
+            } catch (TimmyTaskListOutOfBoundsException e) {
                 ui.showMessage("     Error: Invalid Index.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.showMessage("     Error: No arguments were provided.");
