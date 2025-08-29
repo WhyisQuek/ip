@@ -15,6 +15,6 @@ public class Event extends Task {
     }
 
     public String toFileString() {
-        return "E | " + (isDone ? "1" : "0") + " | " + start + " | " + end;
+        return "E | " + (isDone ? "1" : "0") + " | " + super.toString() + " | " + start + " | " + end;
     }
 }

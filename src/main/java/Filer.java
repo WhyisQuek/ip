@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 
 public class Filer {
@@ -27,9 +26,47 @@ public class Filer {
             Files.writeString(FILE_PATH, data.toString());
 
         } catch (IOException e) {
+            // TODO: CATCH
+            throw new TimmyFilerException();
+        }
+    }
 
+    public static ArrayList<Task> loadStorage() {
+        ArrayList<Task> storage = new ArrayList<Task>();
+        try {
+            String[] data = Files.readString(FILE_PATH).split("\n");
+            for (String line : data) {
+                String[] taskData = line.split(" \\| ");
+                if (taskData[0].equals("T")) {
+                    if (taskData.length == 3) {
+                        ToDo newToDo = new ToDo(taskData[2]);
+                        if (taskData[1].equals("1")) {
+                            newToDo.markAsDone();
+                        }
+                        storage.add(newToDo);
+                    }
+                } else if (taskData[0].equals("D")) {
+                    if (taskData.length == 4) {
+                        Deadline newDeadline = new Deadline(taskData[2], taskData[3]);
+                        if (taskData[1].equals("1")) {
+                            newDeadline.markAsDone();
+                        }
+                        storage.add(newDeadline);
+                    }
+                } else if (taskData[0].equals("E")) {
+                    if (taskData.length == 5) {
+                        Event newEvent = new Event(taskData[2], taskData[3], taskData[4]);
+                        if (taskData[1].equals("1")) {
+                            newEvent.markAsDone();
+                        }
+                        storage.add(newEvent);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            return storage;
         }
 
-
+        return storage;
     }
 }

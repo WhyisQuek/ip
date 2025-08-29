@@ -9,6 +9,6 @@ public class ToDo extends Task {
     }
 
     public String toFileString() {
-        return "D | " + (isDone ? "1" : "0");
+        return "T | " + (isDone ? "1" : "0") + " | " + super.toString();
     }
 }

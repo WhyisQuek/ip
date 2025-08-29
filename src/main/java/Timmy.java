@@ -5,7 +5,7 @@ public class Timmy {
     protected final ArrayList<Task> storage;
 
     public Timmy() {
-        storage = new ArrayList<Task>();
+        storage = Filer.loadStorage();
     }
 
     public static void main(String[] args) {
