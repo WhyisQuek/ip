@@ -63,7 +63,7 @@ public class Timmy {
         Storage.saveStorage(this.taskList.getList());
         ui.showAddMessage(newEvent, this.taskList.size());
     }
-    
+
     private void handleDelete(String input) throws TimmyInvalidParamException, TimmyTaskListOutOfBoundsException {
         int index = Parser.parseMark(input);
         Task deletedTask;
@@ -72,6 +72,12 @@ public class Timmy {
         Storage.saveStorage(this.taskList.getList());
         ui.showDeleteMessage(deletedTask, taskList.size());
     }
+
+    private void handleClear() {
+        this.taskList.clear();
+        Storage.saveStorage(this.taskList.getList());
+    }
+
 
     public void run() {
         Scanner sc = new Scanner(System.in);
@@ -84,31 +90,33 @@ public class Timmy {
                 String[] args = Parser.parseCommand(input);
                 ValidCommand command = ValidCommand.valueOf(args[0].toUpperCase());
                 switch (command) {
-                    case ValidCommand.BYE:
-                        ui.showByeMessage();
-                        isExit = true;
-                        break;
-                    case ValidCommand.LIST:
-                        handleList();
-                        break;
-                    case ValidCommand.MARK:
-                        handleMark(args[1]);
-                        break;
-                    case ValidCommand.UNMARK:
-                        handleUnmark(args[1]);
-                        break;
-                    case ValidCommand.TODO:
-                        handleToDo(args[1]);
-                        break;
-                    case ValidCommand.DEADLINE:
-                        handleDeadline(args[1]);
-                        break;
-                    case ValidCommand.EVENT:
-                        handleEvent(args[1]);
-                        break;
-                    case ValidCommand.DELETE:
-                        handleDelete(args[1]);
-                        break;
+                case BYE:
+                    ui.showByeMessage();
+                    isExit = true;
+                    break;
+                case LIST:
+                    handleList();
+                    break;
+                case MARK:
+                    handleMark(args[1]);
+                    break;
+                case UNMARK:
+                    handleUnmark(args[1]);
+                    break;
+                case TODO:
+                    handleToDo(args[1]);
+                    break;
+                case DEADLINE:
+                    handleDeadline(args[1]);
+                    break;
+                case EVENT:
+                    handleEvent(args[1]);
+                    break;
+                case DELETE:
+                    handleDelete(args[1]);
+                    break;
+                case CLEAR:
+                    handleClear();
                 }
             } catch (IllegalArgumentException e) {
                 ui.showMessage("     Sorry, I do not understand that command.");

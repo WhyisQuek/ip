@@ -30,6 +30,6 @@ public class Event extends Task {
 
     public String toFileString() {
         return "E | " + (isDone ? "1" : "0") + " | " + super.toString()
-                + " | " + start.format(OUTPUT_DATE_FORMAT) + " | " + end.format(INPUT_DATE_FORMAT);
+                + " | " + start.format(INPUT_DATE_FORMAT) + " | " + end.format(INPUT_DATE_FORMAT);
     }
 }

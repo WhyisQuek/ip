@@ -16,7 +16,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        showMessage(CHATBOT_TEXT_OFFSET + "Hello! I'm Timmy.Timmy\n"
+        showMessage(CHATBOT_TEXT_OFFSET + "Hello! I'm Timmy.\n"
                 + CHATBOT_TEXT_OFFSET + "What can I do for you?");
     }
 

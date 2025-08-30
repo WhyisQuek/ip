@@ -37,7 +37,7 @@ public class Storage {
     }
 
     public static ArrayList<Task> loadStorage() {
-        ArrayList<Task> storage = new ArrayList<Task>();
+        ArrayList<Task> list = new ArrayList<Task>();
         try {
             String[] data = Files.readString(FILE_PATH).split("\n");
             for (String line : data) {
@@ -48,7 +48,7 @@ public class Storage {
                         if (taskData[1].equals("1")) {
                             newToDo.markAsDone();
                         }
-                        storage.add(newToDo);
+                        list.add(newToDo);
                     }
                 } else if (taskData[0].equals("D")) {
                     if (taskData.length == 4) {
@@ -56,7 +56,7 @@ public class Storage {
                         if (taskData[1].equals("1")) {
                             newDeadline.markAsDone();
                         }
-                        storage.add(newDeadline);
+                        list.add(newDeadline);
                     }
                 } else if (taskData[0].equals("E")) {
                     if (taskData.length == 5) {
@@ -64,14 +64,14 @@ public class Storage {
                         if (taskData[1].equals("1")) {
                             newEvent.markAsDone();
                         }
-                        storage.add(newEvent);
+                        list.add(newEvent);
                     }
                 }
             }
         } catch (IOException | TimmyDateParsingException e) {
-            return storage;
+            return list;
         }
 
-        return storage;
+        return list;
     }
 }
