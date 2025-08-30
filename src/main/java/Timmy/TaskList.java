@@ -39,6 +39,16 @@ public class TaskList {
         }
     }
 
+    public TaskList find(String regex) {
+        TaskList findList = new TaskList();
+        for (Task task: list) {
+            if (task.description.contains(regex)) {
+                findList.add(task);
+            }
+        }
+        return findList;
+    }
+
     public void clear() {
         list.clear();
     }
