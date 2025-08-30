@@ -2,9 +2,9 @@ package Timmy;
 
 import java.util.Scanner;
 
-import exceptions.TimmyDateParsingException;
-import exceptions.TimmyInvalidParamException;
-import exceptions.TimmyTaskListOutOfBoundsException;
+import Exceptions.TimmyDateParsingException;
+import Exceptions.TimmyInvalidParamException;
+import Exceptions.TimmyTaskListOutOfBoundsException;
 
 public class Timmy {
     protected final Ui ui;
@@ -117,7 +117,11 @@ public class Timmy {
                     break;
                 case CLEAR:
                     handleClear();
+                    break;
+                default:
+                    break;
                 }
+
             } catch (IllegalArgumentException e) {
                 ui.showMessage("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {

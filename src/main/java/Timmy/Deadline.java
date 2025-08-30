@@ -1,15 +1,15 @@
 package Timmy;
 
-import exceptions.TimmyDateParsingException;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import Exceptions.TimmyDateParsingException;
 
 public class Deadline extends Task {
+    protected static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
+    protected static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected final LocalDate end;
-    protected final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
-    protected final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     Deadline(String desc, String end) throws TimmyDateParsingException {
         super(desc);

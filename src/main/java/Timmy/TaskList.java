@@ -1,8 +1,8 @@
 package Timmy;
 
-import exceptions.TimmyTaskListOutOfBoundsException;
-
 import java.util.ArrayList;
+
+import Exceptions.TimmyTaskListOutOfBoundsException;
 
 public class TaskList {
     protected final ArrayList<Task> list;

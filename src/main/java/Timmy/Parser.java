@@ -1,9 +1,9 @@
 package Timmy;
 
-import exceptions.TimmyInvalidParamException;
-
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import Exceptions.TimmyInvalidParamException;
 
 public class Parser {
     public static String[] parseCommand(String command) {
