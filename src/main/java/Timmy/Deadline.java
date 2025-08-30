@@ -1,24 +1,24 @@
 package Timmy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import Exceptions.TimmyDateParsingException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeFormatter;
-
 /**
- * Represents a task with a deadline.
+ * Represents a task with a start and end date.
  */
 public class Deadline extends Task {
+    protected static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
+    protected static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected final LocalDate end;
-    protected final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
-    protected final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Creates an incomplete task with a specified deadline.
+     * Creates an incomplete task with a specified end date.
      *
-     * @param desc  description of the task.
-     * @param end   date of deadline, in d/M/yyyy format.
+     * @param desc  description of the event.
+     * @param end   end date of event, in d/M/yyyy format.
      */
     Deadline(String desc, String end) throws TimmyDateParsingException {
         super(desc);

@@ -1,8 +1,8 @@
 package Timmy;
 
-import Exceptions.TimmyTaskListOutOfBoundsException;
-
 import java.util.ArrayList;
+
+import Exceptions.TimmyTaskListOutOfBoundsException;
 
 /**
  * Represents the list of tasks given by the user that has been stored in Timmy

@@ -3,7 +3,7 @@ package Timmy;
 /**
  * Represents a task to be completed by the user.
  */
-abstract public class Task {
+public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
@@ -57,7 +57,7 @@ abstract public class Task {
     /**
      * Returns the task as a formatted string with a configured status icon.
      *
-     * @return
+     * @return the formatted string with a configured status icon.
      */
     public String toStringWithStatusIcon() {
         return this.getStatusIcon() + " " + this;

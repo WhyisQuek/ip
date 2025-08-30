@@ -1,9 +1,9 @@
 package Timmy;
 
-import Exceptions.TimmyInvalidParamException;
-
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import Exceptions.TimmyInvalidParamException;
 
 /**
  * Collection of static methods used to parse user input commands.

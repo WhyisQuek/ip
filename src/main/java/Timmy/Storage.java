@@ -1,13 +1,13 @@
 package Timmy;
 
-import Exceptions.TimmyDateParsingException;
-import Exceptions.TimmyFilerException;
-
-import java.util.ArrayList;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
+import java.util.ArrayList;
+
+import Exceptions.TimmyDateParsingException;
+import Exceptions.TimmyFilerException;
 
 /**
  * Represents the file used to store the list of tasks given by a user

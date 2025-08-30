@@ -117,7 +117,11 @@ public class Timmy {
                     break;
                 case CLEAR:
                     handleClear();
+                    break;
+                default:
+                    break;
                 }
+
             } catch (IllegalArgumentException e) {
                 ui.showMessage("     Sorry, I do not understand that command.");
             } catch (TimmyInvalidParamException e) {
