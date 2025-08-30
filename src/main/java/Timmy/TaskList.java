@@ -1,6 +1,6 @@
 package Timmy;
 
-import Exceptions.TimmyTaskListOutOfBoundsException;
+import exceptions.TimmyTaskListOutOfBoundsException;
 
 import java.util.ArrayList;
 

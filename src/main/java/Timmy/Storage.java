@@ -1,7 +1,7 @@
 package Timmy;
 
-import Exceptions.TimmyDateParsingException;
-import Exceptions.TimmyFilerException;
+import exceptions.TimmyDateParsingException;
+import exceptions.TimmyFilerException;
 
 import java.util.ArrayList;
 import java.nio.file.Files;

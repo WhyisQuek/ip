@@ -1,6 +1,6 @@
 package Timmy;
 
-import Exceptions.TimmyInvalidParamException;
+import exceptions.TimmyInvalidParamException;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

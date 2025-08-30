@@ -1,6 +1,6 @@
 package Timmy;
 
-import Exceptions.TimmyDateParsingException;
+import exceptions.TimmyDateParsingException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

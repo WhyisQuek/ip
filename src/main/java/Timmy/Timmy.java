@@ -2,9 +2,9 @@ package Timmy;
 
 import java.util.Scanner;
 
-import Exceptions.TimmyDateParsingException;
-import Exceptions.TimmyInvalidParamException;
-import Exceptions.TimmyTaskListOutOfBoundsException;
+import exceptions.TimmyDateParsingException;
+import exceptions.TimmyInvalidParamException;
+import exceptions.TimmyTaskListOutOfBoundsException;
 
 public class Timmy {
     protected final Ui ui;
