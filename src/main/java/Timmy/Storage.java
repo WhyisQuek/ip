@@ -9,11 +9,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 
+/**
+ * Represents the file used to store the list of tasks given by a user
+ * Allows for tasks to be saved between sessions.
+ */
 public class Storage {
     private static final String WORK_DIR = System.getProperty("user.dir");
     private static final Path DIR_PATH = Paths.get(WORK_DIR, "data");
+
+    // Save file path
     private static final Path FILE_PATH = Paths.get(WORK_DIR, "data", "storage.txt");
 
+    /**
+     * Writes the list of tasks to the configured save file.
+     *
+     * @param storage the list of tasks.
+     */
     public static void saveStorage(ArrayList<Task> storage) {
         try {
             if (!Files.exists(DIR_PATH)) {
@@ -36,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the saved list of tasks saved within the save file.
+     *
+     * @return the list of tasks that was saved within the save file.
+     */
     public static ArrayList<Task> loadStorage() {
         ArrayList<Task> list = new ArrayList<Task>();
         try {
