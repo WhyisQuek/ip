@@ -73,6 +73,14 @@ public class Timmy {
         ui.showDeleteMessage(deletedTask, taskList.size());
     }
 
+    private void handleFind(String input) throws TimmyInvalidParamException {
+        if (input.isEmpty()) {
+            throw new TimmyInvalidParamException();
+        }
+        TaskList findList = this.taskList.find(input);
+        ui.showFindList(findList.getList());
+    }
+
     private void handleClear() {
         this.taskList.clear();
         Storage.saveStorage(this.taskList.getList());
@@ -114,6 +122,9 @@ public class Timmy {
                     break;
                 case DELETE:
                     handleDelete(args[1]);
+                    break;
+                case FIND:
+                    handleFind(args[1]);
                     break;
                 case CLEAR:
                     handleClear();

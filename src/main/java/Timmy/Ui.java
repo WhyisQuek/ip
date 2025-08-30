@@ -42,16 +42,31 @@ public class Ui {
     /**
      * Prints the current list of tasks stored in memory.
      *
-     * @param storage the current list of tasks.
+     * @param list the current list of tasks.
      */
-    public void showList(ArrayList<Task> storage) {
+    public void showList(ArrayList<Task> list) {
         int index = 1;
         System.out.println(CHATBOT_BORDER);
-        for (Task t : storage) {
-            System.out.println("    " + index + ". " + t.toCompleteString());
+        for (Task t : list) {
+            System.out.println(CHATBOT_TEXT_OFFSET + index + ". " + t.toCompleteString());
             index += 1;
         }
         System.out.println(CHATBOT_BORDER);
+    }
+
+    public void showFindList(ArrayList<Task> list) {
+        if (list.isEmpty()) {
+            showMessage(CHATBOT_TEXT_OFFSET + "No matching tasks were found.");
+        } else {
+            int index = 1;
+            System.out.println(CHATBOT_BORDER);
+            System.out.println(CHATBOT_TEXT_OFFSET + "Here are the matching tasks in your list:");
+            for (Task t : list) {
+                System.out.println(CHATBOT_TEXT_OFFSET + index + ". " + t.toCompleteString());
+                index += 1;
+            }
+            System.out.println(CHATBOT_BORDER);
+        }
     }
 
     /**
