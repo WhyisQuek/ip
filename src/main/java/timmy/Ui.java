@@ -8,10 +8,6 @@ import Exceptions.TimmyTaskListOutOfBoundsException;
  * Collection of methods used to print Timmy's output to the user interface.
  */
 public class Ui {
-    private static final String CHATBOT_TEXT_OFFSET = "     ";
-    private static final String CHATBOT_TEXT_LARGE_OFFSET = "       ";
-    private static final String CHATBOT_BORDER = "    ____________________________________________________________";
-
     public Ui() {}
 
     /**

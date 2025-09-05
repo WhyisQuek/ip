@@ -5,13 +5,16 @@
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
-    -fx-font: 20px "Arial";
+    -fx-background-color: #111116;
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: #f0f0f0;
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
-    -fx-font: italic bold 16px "Arial";
+    -fx-background-color: #161622;
+    -fx-font: italic bold 16px "Segoe UI";
+    -fx-text-fill: #f0f0f0;
+    -fx-border-radius: 1em 1em 1em 1em;
 }
 
 .button:hover {
