@@ -1,4 +1,4 @@
-package Timmy;
+package timmy;
 
 import java.util.ArrayList;
 

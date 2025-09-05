@@ -1,4 +1,4 @@
-package Timmy;
+package timmy;
 
 /**
  * Represents a simple task with no auxiliary details.

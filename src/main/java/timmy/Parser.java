@@ -1,4 +1,4 @@
-package Timmy;
+package timmy;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

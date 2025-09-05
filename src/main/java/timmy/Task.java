@@ -1,4 +1,4 @@
-package Timmy;
+package timmy;
 
 /**
  * Represents a task to be completed by the user.

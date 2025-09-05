@@ -1,4 +1,4 @@
-package Timmy;
+package timmy;
 
 public enum ValidCommand {
     BYE,
