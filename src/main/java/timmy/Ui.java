@@ -52,12 +52,11 @@ public class Ui {
                 .orElse("You have no tasks at the moment.");
     }
 
-    public String getTasksFromList(TaskList list, String regex) {
-        TaskList findList = list.find(regex);
+    public String getFilteredList(TaskList list) {
         return IntStream.range(0, list.size())
                 .mapToObj(i -> {
                     try {
-                        return (i + 1) + ". " + findList.getTask(i).toCompleteString();
+                        return (i + 1) + ". " + list.getTask(i).toCompleteString();
                     } catch (TimmyTaskListOutOfBoundsException e) {
                         return "";
                     }

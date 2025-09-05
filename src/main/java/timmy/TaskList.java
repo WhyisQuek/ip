@@ -70,10 +70,19 @@ public class TaskList {
         }
     }
 
+    private boolean hasMatch(Task task, String[] keywords) {
+        for (String regex: keywords) {
+            if (task.description.contains(regex)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public TaskList find(String regex) {
         TaskList findList = new TaskList();
         for (Task task: list) {
-            if (task.description.contains(regex)) {
+            if (hasMatch(task, regex.split(" "))) {
                 findList.add(task);
             }
         }

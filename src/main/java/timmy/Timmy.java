@@ -124,7 +124,8 @@ public class Timmy {
         if (input.isEmpty()) {
             throw new TimmyInvalidParamException();
         }
-        return ui.getTasksFromList(this.taskList, input);
+        TaskList filteredList = this.taskList.find(input);
+        return ui.getFilteredList(filteredList);
     }
 
     private String handleClear() {
