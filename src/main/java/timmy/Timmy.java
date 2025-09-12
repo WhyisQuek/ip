@@ -1,7 +1,5 @@
 package timmy;
 
-import java.util.Scanner;
-
 import Exceptions.TimmyDateParsingException;
 import Exceptions.TimmyInvalidParamException;
 import Exceptions.TimmyTaskListOutOfBoundsException;
@@ -49,15 +47,15 @@ public class Timmy {
             }
 
         } catch (IllegalArgumentException e) {
-            return "Sorry, I do not understand that command.";
+            return ui.getUnknownCommandMessage();
         } catch (TimmyInvalidParamException e) {
-            return "Error: Invalid Parameters were provided.";
+            return ui.getInvalidParameterMessage();
         } catch (TimmyTaskListOutOfBoundsException e) {
-            return "Error: Invalid Index.";
+            return ui.getInvalidIndexMessage();
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "Error: No arguments were provided.";
+            return ui.getNoArgumentsMessage();
         } catch (TimmyDateParsingException e) {
-            return "Error: Invalid Date Format.";
+            return ui.getInvalidDateFormatMessage();
         }
     }
 
@@ -131,6 +129,6 @@ public class Timmy {
     private String handleClear() {
         this.taskList.clear();
         Storage.saveStorage(this.taskList.getList());
-        return "Storage cleared.";
+        return ui.getClearMessage();
     }
 }

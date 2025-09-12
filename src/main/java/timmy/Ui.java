@@ -108,4 +108,28 @@ public class Ui {
         return "Ok. I've marked this task as not done yet:\n"
                 + task.toCompleteString();
     }
+
+    public String getClearMessage() {
+        return "Storage Cleared.";
+    }
+
+    public String getUnknownCommandMessage() {
+        return "Sorry, I do not understand that command.";
+    }
+
+    public String getInvalidParameterMessage() {
+        return "Error: Invalid Parameters were provided.";
+    }
+
+    public String getInvalidIndexMessage() {
+        return "Error: Invalid Index.";
+    }
+
+    public String getNoArgumentsMessage() {
+        return "Error: No arguments were provided.";
+    }
+
+    public String getInvalidDateFormatMessage() {
+        return "Error: Invalid Date Format.";
+    }
 }
