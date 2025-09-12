@@ -24,8 +24,6 @@ public class Timmy {
             String[] args = Parser.parseCommand(input);
             ValidCommand command = ValidCommand.valueOf(args[0].toUpperCase());
             switch (command) {
-            case BYE:
-                return handleBye();
             case LIST:
                 return handleList();
             case MARK:
@@ -59,11 +57,6 @@ public class Timmy {
         } catch (TimmyDateParsingException e) {
             return "Error: Invalid Date Format.";
         }
-    }
-
-    private String handleBye() {
-        System.exit(0);
-        return ui.getByeMessage();
     }
 
     private String handleList() {

@@ -1,7 +1,6 @@
 package timmy;
 
 public enum ValidCommand {
-    BYE,
     LIST,
     MARK,
     UNMARK,

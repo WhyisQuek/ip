@@ -52,6 +52,7 @@ public class Parser {
         Pattern pattern = Pattern.compile("(.*?) /by (.*)");
         Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {
+            assert matcher.groupCount() == 2;
             return new String[]{matcher.group(1), matcher.group(2)};
         } else {
             throw new TimmyInvalidParamException();
@@ -71,6 +72,7 @@ public class Parser {
         Pattern pattern = Pattern.compile("(.*?) /from (.*?) /to (.*)");
         Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {
+            assert matcher.groupCount() == 3;
             return new String[]{matcher.group(1), matcher.group(2), matcher.group(3)};
         } else {
             throw new TimmyInvalidParamException();

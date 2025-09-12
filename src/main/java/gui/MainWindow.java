@@ -46,6 +46,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
+
+        if (input.equalsIgnoreCase("bye")) {
+            System.exit(0);
+        }
+
         String response = timmy.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
