@@ -11,15 +11,6 @@ public class Ui {
     public Ui() {}
 
     /**
-     * Prints a given message with pre-set borders.
-     *
-     * @param message the message to be printed.
-     */
-    public String getMessage(String message) {
-        return message;
-    }
-
-    /**
      * Prints the welcome message to be shown when Timmy is run.
      */
     public String getWelcomeMessage() {
