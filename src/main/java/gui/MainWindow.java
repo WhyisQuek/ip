@@ -37,6 +37,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setTimmy(Timmy t) {
         timmy = t;
+        showWelcomeMessage();
     }
 
     /**
@@ -57,5 +58,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getTimmyDialog(response, timmyImage)
         );
         userInput.clear();
+    }
+
+    private void showWelcomeMessage() {
+        String response = timmy.getWelcomeMessage();
+        dialogContainer.getChildren().add(
+                DialogBox.getTimmyDialog(response, timmyImage)
+        );
     }
 }

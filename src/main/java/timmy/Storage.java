@@ -47,6 +47,42 @@ public class Storage {
         }
     }
 
+    private static void loadToDo(String[] taskData, ArrayList<Task> list) {
+        if (taskData.length != 3) {
+            return;
+        }
+
+        ToDo newToDo = new ToDo(taskData[2]);
+        if (taskData[1].equals("1")) {
+            newToDo.markAsDone();
+        }
+        list.add(newToDo);
+    }
+
+    private static void loadDeadline(String[] taskData, ArrayList<Task> list) {
+        if (taskData.length != 4) {
+            return;
+        }
+
+        Deadline newDeadline = new Deadline(taskData[2], taskData[3]);
+        if (taskData[1].equals("1")) {
+            newDeadline.markAsDone();
+        }
+        list.add(newDeadline);
+    }
+
+    private static void loadEvent(String[] taskData, ArrayList<Task> list) {
+        if (taskData.length != 5) {
+            return;
+        }
+
+        Event newEvent = new Event(taskData[2], taskData[3], taskData[4]);
+        if (taskData[1].equals("1")) {
+            newEvent.markAsDone();
+        }
+        list.add(newEvent);
+    }
+
     /**
      * Loads the saved list of tasks saved within the save file.
      *
@@ -58,30 +94,18 @@ public class Storage {
             String[] data = Files.readString(FILE_PATH).split("\n");
             for (String line : data) {
                 String[] taskData = line.split(" \\| ");
-                if (taskData[0].equals("T")) {
-                    if (taskData.length == 3) {
-                        ToDo newToDo = new ToDo(taskData[2]);
-                        if (taskData[1].equals("1")) {
-                            newToDo.markAsDone();
-                        }
-                        list.add(newToDo);
-                    }
-                } else if (taskData[0].equals("D")) {
-                    if (taskData.length == 4) {
-                        Deadline newDeadline = new Deadline(taskData[2], taskData[3]);
-                        if (taskData[1].equals("1")) {
-                            newDeadline.markAsDone();
-                        }
-                        list.add(newDeadline);
-                    }
-                } else if (taskData[0].equals("E")) {
-                    if (taskData.length == 5) {
-                        Event newEvent = new Event(taskData[2], taskData[3], taskData[4]);
-                        if (taskData[1].equals("1")) {
-                            newEvent.markAsDone();
-                        }
-                        list.add(newEvent);
-                    }
+                switch (taskData[0]) {
+                case "T":
+                    loadToDo(taskData, list);
+                    break;
+                case "D":
+                    loadDeadline(taskData, list);
+                    break;
+                case "E":
+                    loadEvent(taskData, list);
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (IOException | TimmyDateParsingException e) {
