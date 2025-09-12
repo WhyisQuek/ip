@@ -1,0 +1,6 @@
+T | 1 | testing
+T | 1 | hello there
+E | 0 | Birthday | 19/12/2025 | 19/12/2025
+T | 0 | event
+D | 0 | homework | 12/9/2025
+E | 0 | hello | 12/9/2025 | 13/9/2025

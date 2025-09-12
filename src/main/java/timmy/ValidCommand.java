@@ -9,5 +9,6 @@ public enum ValidCommand {
     EVENT,
     DELETE,
     FIND,
-    CLEAR
+    CLEAR,
+    ARCHIVE
 }

@@ -44,6 +44,8 @@ public class Timmy {
                 return handleFind(args[1]);
             case CLEAR:
                 return handleClear();
+            case ARCHIVE:
+                return handleArchive();
             default:
                 return "";
             }
@@ -127,5 +129,12 @@ public class Timmy {
         this.taskList.clear();
         Storage.saveStorage(this.taskList.getList());
         return ui.getClearMessage();
+    }
+
+    private String handleArchive() {
+        String archivePath = Storage.archiveStorage(this.taskList.getList());
+        this.taskList.clear();
+        Storage.saveStorage((this.taskList.getList()));
+        return ui.getArchiveMessage(archivePath);
     }
 }

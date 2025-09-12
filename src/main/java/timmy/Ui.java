@@ -104,6 +104,10 @@ public class Ui {
         return "Storage Cleared.";
     }
 
+    public String getArchiveMessage(String archivePath) {
+        return "Storage Archived to " + archivePath + ".";
+    }
+
     public String getUnknownCommandMessage() {
         return "Sorry, I do not understand that command.";
     }

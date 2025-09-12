@@ -47,6 +47,37 @@ public class Storage {
         }
     }
 
+    private static Path getNextArchivePath() {
+        int i = 1;
+        Path archivePath;
+        do {
+            archivePath = Paths.get(WORK_DIR, "data", "archive-" + i + ".txt");
+            i += 1;
+        } while (Files.exists(archivePath));
+        return archivePath;
+    }
+
+    public static String archiveStorage(ArrayList<Task> storage) {
+        try {
+            if (!Files.exists(DIR_PATH)) {
+                Files.createDirectory(DIR_PATH);
+            }
+            Path archivePath = getNextArchivePath();
+
+            StringBuilder data = new StringBuilder();
+            for (Task t : storage) {
+                data.append(t.toFileString());
+                data.append("\n");
+            }
+            Files.writeString(archivePath, data.toString());
+            return archivePath.toString();
+
+        } catch (IOException e) {
+            // TODO: CATCH
+            throw new TimmyFilerException();
+        }
+    }
+
     private static void loadToDo(String[] taskData, ArrayList<Task> list) {
         if (taskData.length != 3) {
             return;
