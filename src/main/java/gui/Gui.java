@@ -32,6 +32,7 @@ public class Gui extends Application {
             stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setTimmy(timmy); // inject the Timmy instance
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

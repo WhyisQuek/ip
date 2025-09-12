@@ -17,6 +17,10 @@ public class Timmy {
         return;
     }
 
+    public String getWelcomeMessage() {
+        return ui.getWelcomeMessage();
+    }
+
     public String getResponse(String input) {
         try {
             String[] args = Parser.parseCommand(input);
