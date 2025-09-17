@@ -53,10 +53,18 @@ public class MainWindow extends AnchorPane {
         }
 
         String response = timmy.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getTimmyDialog(response, timmyImage)
-        );
+
+        if (response.startsWith("Error:")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getTimmyErrorDialog(response, timmyImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getTimmyDialog(response, timmyImage)
+            );
+        }
         userInput.clear();
     }
 
