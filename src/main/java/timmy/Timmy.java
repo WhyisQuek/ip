@@ -1,6 +1,7 @@
 package timmy;
 
 import Exceptions.TimmyDateParsingException;
+import Exceptions.TimmyFilerException;
 import Exceptions.TimmyInvalidParamException;
 import Exceptions.TimmyTaskListOutOfBoundsException;
 
@@ -60,6 +61,8 @@ public class Timmy {
             return ui.getNoArgumentsMessage();
         } catch (TimmyDateParsingException e) {
             return ui.getInvalidDateFormatMessage();
+        } catch (TimmyFilerException e) {
+            return ui.getFilerErrorMessage();
         }
     }
 

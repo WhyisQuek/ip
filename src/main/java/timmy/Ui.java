@@ -127,4 +127,8 @@ public class Ui {
     public String getInvalidDateFormatMessage() {
         return "Error: Invalid Date Format.";
     }
+
+    public String getFilerErrorMessage() {
+        return "Error: An issue was encountered saving the task list.";
+    }
 }

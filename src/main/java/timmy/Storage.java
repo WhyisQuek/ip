@@ -21,9 +21,11 @@ public class Storage {
     private static final Path FILE_PATH = Paths.get(WORK_DIR, "data", "storage.txt");
 
     /**
-     * Writes the list of tasks to the configured save file.
+     * Writes the given list of tasks to the main storage file.
+     * If the storage directory or file does not exist, they will be created.
      *
-     * @param storage the list of tasks.
+     * @param storage the list of tasks to save.
+     * @throws TimmyFilerException if an I/O error occurs while writing to the file.
      */
     public static void saveStorage(ArrayList<Task> storage) {
         try {
@@ -42,11 +44,16 @@ public class Storage {
             Files.writeString(FILE_PATH, data.toString());
 
         } catch (IOException e) {
-            // TODO: CATCH
             throw new TimmyFilerException();
         }
     }
 
+    /**
+     * Generates the next available archive file path by checking
+     * for existing archived files and incrementing the archive number.
+     *
+     * @return a {@link Path} object pointing to the next archive file.
+     */
     private static Path getNextArchivePath() {
         int i = 1;
         Path archivePath;
@@ -57,6 +64,14 @@ public class Storage {
         return archivePath;
     }
 
+    /**
+     * Saves the current task list into a new archive file without overwriting the main storage.
+     * Each archive file is uniquely numbered to avoid conflicts.
+     *
+     * @param storage the list of tasks to archive.
+     * @return the file path of the newly created archive file as a string.
+     * @throws TimmyFilerException if an I/O error occurs while writing to the archive file.
+     */
     public static String archiveStorage(ArrayList<Task> storage) {
         try {
             if (!Files.exists(DIR_PATH)) {
@@ -73,11 +88,16 @@ public class Storage {
             return archivePath.toString();
 
         } catch (IOException e) {
-            // TODO: CATCH
             throw new TimmyFilerException();
         }
     }
 
+    /**
+     * Loads a {@link ToDo} task from serialized task data and appends it to the list.
+     *
+     * @param taskData the split string array containing serialized task details.
+     * @param list the task list to which the new {@link ToDo} will be added.
+     */
     private static void loadToDo(String[] taskData, ArrayList<Task> list) {
         if (taskData.length != 3) {
             return;
@@ -90,6 +110,12 @@ public class Storage {
         list.add(newToDo);
     }
 
+    /**
+     * Loads a {@link Deadline} task from serialized task data and appends it to the list.
+     *
+     * @param taskData the split string array containing serialized task details.
+     * @param list the task list to which the new {@link Deadline} will be added.
+     */
     private static void loadDeadline(String[] taskData, ArrayList<Task> list) {
         if (taskData.length != 4) {
             return;
@@ -102,6 +128,12 @@ public class Storage {
         list.add(newDeadline);
     }
 
+    /**
+     * Loads an {@link Event} task from serialized task data and appends it to the list.
+     *
+     * @param taskData the split string array containing serialized task details.
+     * @param list the task list to which the new {@link Event} will be added.
+     */
     private static void loadEvent(String[] taskData, ArrayList<Task> list) {
         if (taskData.length != 5) {
             return;
@@ -115,9 +147,10 @@ public class Storage {
     }
 
     /**
-     * Loads the saved list of tasks saved within the save file.
+     * Loads tasks from the main storage file and reconstructs them into task objects.
+     * If the file does not exist or an error occurs, an empty list is returned.
      *
-     * @return the list of tasks that was saved within the save file.
+     * @return the list of tasks restored from storage.
      */
     public static ArrayList<Task> loadStorage() {
         ArrayList<Task> list = new ArrayList<Task>();
