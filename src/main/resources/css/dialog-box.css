@@ -13,6 +13,21 @@
     -fx-border-radius: 1em 1em 0 1em;
 }
 
+.user-label {
+    -fx-background-color: linear-gradient(to bottom right, #0a3d0a, #1e8c1e);
+    -fx-border-color: #006400;
+    -fx-border-width: 2px;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+}
+
+.error-label {
+    -fx-background-color: linear-gradient(to bottom right, crimson, lightcoral);
+    -fx-text-fill: white;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+}
+
 .reply-label {
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
