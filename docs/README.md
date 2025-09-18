@@ -103,19 +103,19 @@ Tasks are removed from Timmy's memory once archived. To restore an archive, repl
 
 ## Command Summary
 
-| Command Example                        | What it does                    |
-| -------------------------------------- | ------------------------------- |
-| `todo read book`                       | Adds a todo task                |
-| `deadline return book /by 2025-09-30`  | Adds a deadline task            |
-| `event project meeting /at 2025-10-01` | Adds an event task              |
-| `list`                                 | Lists all tasks                 |
-| `mark 2`                               | Marks task #2 as done           |
-| `unmark 2`                             | Unmarks task #2 as done         |
-| `delete 3`                             | Deletes task #3                 |
-| `clear`                                | Deletes all tasks               |
-| `find book`                            | Finds tasks with "book" in them |
-| `archive`                              | Archives existing tasks         |
-| `bye`                                  | Exits the chatbot               |
+| Command Example                       | What it does                    |
+|---------------------------------------| ------------------------------- |
+| `todo read book`                      | Adds a todo task                |
+| `deadline return book /by 30/9/2025`  | Adds a deadline task            |
+| `event project meeting /at 1/10/2025` | Adds an event task              |
+| `list`                                | Lists all tasks                 |
+| `mark 2`                              | Marks task #2 as done           |
+| `unmark 2`                            | Unmarks task #2 as done         |
+| `delete 3`                            | Deletes task #3                 |
+| `clear`                               | Deletes all tasks               |
+| `find book`                           | Finds tasks with "book" in them |
+| `archive`                             | Archives existing tasks         |
+| `bye`                                 | Exits the chatbot               |
 
 ---
 
