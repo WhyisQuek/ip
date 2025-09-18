@@ -11,9 +11,9 @@ This guide will walk you through the main features and usage so you can start ri
 1. **Run Timmy**  
    Make sure you have Java 17 or above installed.
    
-   Then, Download the latest .jar file.
+   Then, download the latest .jar file.
 
-   Open a command terminal, cd into the folder you put the jar file in, and use the java -jar timmy.jar command to run the application.
+   Open a command terminal, `cd` into the folder you put the jar file in, and enter `java -jar Timmy.jar` to run the application.
 
 
 
