@@ -52,12 +52,13 @@ View all tasks currently stored:
 list
 ```
 
-### 3. Mark as Done
+### 3. Mark/Unmark as Done
 
-Mark a task as completed by its index number:
+Mark or unmark a task as completed by its index number:
 
 ```text
 mark 2
+unmark 2
 ```
 
 ### 4. Delete Tasks
@@ -109,6 +110,7 @@ Tasks are removed from Timmy's memory once archived. To restore an archive, repl
 | `event project meeting /at 2025-10-01` | Adds an event task              |
 | `list`                                 | Lists all tasks                 |
 | `mark 2`                               | Marks task #2 as done           |
+| `unmark 2`                             | Unmarks task #2 as done         |
 | `delete 3`                             | Deletes task #3                 |
 | `clear`                                | Deletes all tasks               |
 | `find book`                            | Finds tasks with "book" in them |
