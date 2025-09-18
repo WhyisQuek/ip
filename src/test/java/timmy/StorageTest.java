@@ -22,7 +22,7 @@ public class StorageTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        dataDir = Path.of(System.getProperty("user.dir"), "test_data");
+        dataDir = Path.of(System.getProperty("user.dir"), "data");
         storageFile = dataDir.resolve("storage.txt");
 
         // Clean up before tests

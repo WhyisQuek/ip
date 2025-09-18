@@ -1,22 +1,40 @@
 package timmy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Unit tests for {@link ToDo}.
+ */
 public class ToDoTest {
+
     @Test
-    public void toCompleteStringTest() {
-        ToDo testToDo = new ToDo("Test ToDo");
-        testToDo.markAsDone();
-        assertEquals("[T][X] Test ToDo", testToDo.toCompleteString());
+    void creation_setsDescriptionAndIncomplete() {
+        ToDo todo = new ToDo("Write tests");
+
+        assertEquals("Write tests", todo.toString());
+        assertFalse(todo.isDone, "New ToDo should not be marked as done");
     }
 
     @Test
-    public void toFileStringTest() {
-        ToDo testToDo = new ToDo("Test ToDo");
-        testToDo.markAsDone();
-        assertEquals("T | 1 | Test ToDo", testToDo.toFileString());
+    void markAsDone_reflectsInOutput() {
+        ToDo todo = new ToDo("Finish homework");
+        todo.markAsDone();
+
+        assertTrue(todo.isDone);
+        assertEquals("[T][X] Finish homework", todo.toCompleteString());
+        assertEquals("T | 1 | Finish homework", todo.toFileString());
+    }
+
+    @Test
+    void markAsNotDone_reflectsInOutput() {
+        ToDo todo = new ToDo("Review code");
+        todo.markAsDone();
+        todo.markAsNotDone();
+
+        assertFalse(todo.isDone);
+        assertEquals("[T][ ] Review code", todo.toCompleteString());
+        assertEquals("T | 0 | Review code", todo.toFileString());
     }
 }
-
