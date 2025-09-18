@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import Exceptions.TimmyDateParsingException;
+import exceptions.TimmyDateParsingException;
 
 /**
  * Unit tests for {@link Deadline}.

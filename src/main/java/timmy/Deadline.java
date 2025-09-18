@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import Exceptions.TimmyDateParsingException;
+import exceptions.TimmyDateParsingException;
 
 /**
  * Represents a task with a start and end date.

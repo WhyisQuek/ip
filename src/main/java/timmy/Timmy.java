@@ -1,9 +1,9 @@
 package timmy;
 
-import Exceptions.TimmyDateParsingException;
-import Exceptions.TimmyFilerException;
-import Exceptions.TimmyInvalidParamException;
-import Exceptions.TimmyTaskListOutOfBoundsException;
+import exceptions.TimmyDateParsingException;
+import exceptions.TimmyFilerException;
+import exceptions.TimmyInvalidParamException;
+import exceptions.TimmyTaskListOutOfBoundsException;
 
 public class Timmy {
     protected final Ui ui;

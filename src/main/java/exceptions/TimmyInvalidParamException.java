@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class TimmyInvalidParamException extends Exception {
     public TimmyInvalidParamException() {}

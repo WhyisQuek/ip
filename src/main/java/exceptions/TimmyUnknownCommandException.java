@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class TimmyUnknownCommandException extends Exception {
     public TimmyUnknownCommandException() {}

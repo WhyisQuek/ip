@@ -6,8 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import Exceptions.TimmyDateParsingException;
-import Exceptions.TimmyFilerException;
+import exceptions.TimmyDateParsingException;
+import exceptions.TimmyFilerException;
 
 /**
  * Represents the file used to store the list of tasks given by a user

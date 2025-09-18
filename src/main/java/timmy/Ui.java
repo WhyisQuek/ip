@@ -2,7 +2,7 @@ package timmy;
 
 import java.util.stream.IntStream;
 
-import Exceptions.TimmyTaskListOutOfBoundsException;
+import exceptions.TimmyTaskListOutOfBoundsException;
 
 /**
  * Collection of methods used to print Timmy's output to the user interface.

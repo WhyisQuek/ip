@@ -3,7 +3,7 @@ package timmy;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Exceptions.TimmyInvalidParamException;
+import exceptions.TimmyInvalidParamException;
 
 /**
  * Collection of static methods used to parse user input commands.
